@@ -3,82 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sut Gyi Food Guide</title>
+    <title>Sut Gyi Global Food Guide</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="welcome-screen">
-        <div class="fade-in-type" id="w-mm">Sut Gyi Food Guide မှ ကြိုဆိုပါတယ်</div>
-        <div class="fade-in-type" id="w-en">Welcome to Sut Gyi Food Guide</div>
-        <div class="fade-in-type" id="w-cn">欢迎来到 Sut Gyi 美食指南</div>
-    </div>
-
-    <div id="login-screen" style="display: none;">
-        <div class="glass-card">
-            <h2 id="login-title">ကိုယ်ရေးအချက်အလက် (Profile)</h2>
-            <div class="profile-frame">
-                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="preview" class="profile-pic">
+    <div id="login-screen">
+        <div class="login-card">
+            <h1>Sut Gyi Food Guide</h1>
+            <p>Global Directory</p>
+            <div class="profile-upload" onclick="document.getElementById('pInput').click()">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" id="pPreview">
             </div>
-            <input type="file" id="fileInput" accept="image/*" style="display:none">
-            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">ပုံတင်ရန် / Upload</button>
-            
-            <input type="text" id="userName" placeholder="နာမည် (Name/姓名)">
-            <input type="text" id="userPhone" placeholder="ဖုန်းနံပါတ် (Phone/电话)">
-            <button class="enter-btn" onclick="startApp()">ဝင်မည် / Enter</button>
+            <input type="file" id="pInput" hidden accept="image/*">
+            <input type="text" id="nameIn" placeholder="နာမည်ရိုက်ထည့်ပါ">
+            <input type="text" id="phoneIn" placeholder="ဖုန်းနံပါတ်ရိုက်ထည့်ပါ">
+            <button class="enter-btn" onclick="initApp()">စတင်အသုံးပြုမည်</button>
         </div>
     </div>
 
-    <div id="main-content" style="display: none;">
-        <header class="sticky-header">
-            <div class="header-top">
-                <div class="user-info">
-                    <img id="userImg" src="" class="nav-profile-img">
-                    <span id="displayName"></span>
+    <div id="main-app">
+        <header>
+            <div class="header-ui">
+                <div class="user-meta">
+                    <img id="headerImg" src="">
+                    <span id="headerName"></span>
                 </div>
-                <div class="lang-switch">
-                    <button onclick="changeLang('mm')">MY</button>
-                    <button onclick="changeLang('en')">EN</button>
-                    <button onclick="changeLang('cn')">CN</button>
+                <div class="lang-selector">
+                    <button onclick="changeLang('mm')" id="btn-mm" class="active-lang">MY</button>
+                    <button onclick="changeLang('en')" id="btn-en">EN</button>
                 </div>
             </div>
-            <input type="text" class="search-bar" id="search" placeholder="ရှာဖွေရန်... (Search)">
-            
-            <nav class="category-nav">
-                <button onclick="scrollToSection('foods')">Food</button>
-                <button onclick="scrollToSection('drinks')">Drinks</button>
-                <button onclick="scrollToSection('veggie')">Veggie</button>
-                <button class="fav-btn">❤️ Favorite</button>
-            </nav>
+            <div class="search-box-container">
+                <input type="text" id="searchBar" placeholder="ကမ္ဘာ့အစားအစာ၊ အသီးအရွက်များကို ရှာဖွေရန်...">
+            </div>
         </header>
 
-        <main>
-            <section id="foods-section">
-                <h3 class="section-title" id="food-t">နိုင်ငံစုံ အစားအစာများ</h3>
-                <div class="food-grid" id="food-container">
-                    <div class="food-item">
-                        <span class="heart">♡</span>
-                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200" alt="Pizza">
-                        <h4>Pizza Hut</h4>
-                        <p class="price">12,000 MMK</p>
-                        <button class="detail-btn" onclick="showDetail('Pizza Hut', '091234567', 'http://maps.google.com')">Details</button>
-                    </div>
-                </div>
-            </section>
+        <nav class="category-nav">
+            <button class="cat-btn active" onclick="filterData('all', this)">All</button>
+            <button class="cat-btn" onclick="filterData('foods', this)">Foods</button>
+            <button class="cat-btn" onclick="filterData('drinks', this)">Drinks</button>
+            <button class="cat-btn" onclick="filterData('veggie', this)">Vegetables</button>
+        </nav>
 
-            <div class="banner" id="veggie-banner">ဟင်းသီးဟင်းရွက်များကို သန့်ရှင်းသော Supermarket များတွင် ဝယ်ယူရန် အကြံပြုပါသည်။</div>
+        <div class="info-banner" id="banner-text">
+            ဟင်းသီးဟင်းရွက်များကို သန့်ရှင်းသော Supermarket များတွင် ဝယ်ယူရန် အကြံပြုပါသည်။
+        </div>
 
-            <section id="drinks-section">
-                <h3 class="section-title" id="drink-t">သောက်စရာနှင့် ၂၄ နာရီဆိုင်များ</h3>
-                <div class="food-grid" id="drink-container">
-                    <div class="food-item">
-                        <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=200" alt="Coffee">
-                        <h4>G&G Coffee</h4>
-                        <button class="detail-btn" onclick="showDetail('G&G (24hr)', '0977889900', 'https://goo.gl/maps/example')">Call & Maps</button>
-                    </div>
-                </div>
-            </section>
-        </main>
+        <main id="foodGrid" class="food-grid"></main>
     </div>
 
     <script src="script.js"></script>
