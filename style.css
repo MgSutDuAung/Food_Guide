@@ -1,64 +1,113 @@
+:root {
+    --primary-blue: #004aad;
+    --accent-blue: #00d4ff;
+    --glass: rgba(255, 255, 255, 0.15);
+}
+
 body {
-    font-family: 'Pyidaungsu', sans-serif;
-    background-color: #f0fdf4;
-    color: #166534;
     margin: 0;
-    padding: 10px;
+    background-color: var(--primary-blue);
+    color: white;
+    font-family: sans-serif;
+}
+
+/* Welcome Animations */
+#welcome-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--primary-blue);
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    z-index: 2000;
 }
 
-header {
-    width: 100%;
-    max-width: 1000px;
-    text-align: center;
-    padding: 20px 0;
-    animation: fadeInDown 1s ease;
-}
-
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-}
-
-.bmi-section, #calc-btn { display: none; } /* BMI အပိုင်းကို ဖြုတ်ရန် */
-
-.food-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    width: 90%;
-    max-width: 1000px;
-    margin-top: 30px;
-}
-
-.food-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    text-align: center;
-    border-bottom: 5px solid #22c55e;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    animation: popIn 0.5s ease forwards;
+.fade-in-type {
     opacity: 0;
-}
-
-.food-card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
-}
-
-.food-card h3 {
     font-size: 1.5rem;
-    margin-bottom: 5px;
+    margin: 10px;
+    border-right: 2px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
 }
 
-@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+#w-mm { animation: fadeIn 1s forwards, typing 2s steps(20) 1s forwards; }
+#w-en { animation: fadeIn 1s 3s forwards, typing 2s steps(20) 4s forwards; }
+#w-cn { animation: fadeIn 1s 6s forwards, typing 2s steps(20) 7s forwards; }
 
-.hidden { display: none; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+
+/* Profile Card */
+.glass-card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 30px;
+    border-radius: 25px;
+    width: 320px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.profile-frame {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    padding: 5px;
+    border: 2px solid var(--accent-blue);
+    box-shadow: 0 0 15px var(--accent-blue);
+}
+
+.profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+input {
+    width: 90%; padding: 12px; margin: 10px 0;
+    border-radius: 10px; border: none; outline: none;
+}
+
+.enter-btn {
+    background: var(--accent-blue);
+    color: white; font-weight: bold;
+    width: 95%; padding: 12px; border: none; border-radius: 10px; cursor: pointer;
+}
+
+/* Main Layout */
+.sticky-header {
+    position: sticky; top: 0;
+    background: var(--primary-blue);
+    padding: 15px; border-bottom: 1px solid var(--glass);
+    z-index: 1000;
+}
+
+.header-top { display: flex; justify-content: space-between; align-items: center; }
+
+.nav-profile-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-blue); }
+
+.search-bar { width: 95%; margin-top: 15px; border-radius: 20px; }
+
+.category-nav { display: flex; overflow-x: auto; gap: 10px; margin-top: 10px; }
+
+.category-nav button {
+    background: white; color: black; border: none;
+    padding: 8px 18px; border-radius: 20px; white-space: nowrap;
+}
+
+/* Food Grid */
+.food-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px; padding: 15px;
+}
+
+.food-item {
+    background: white; color: black; padding: 10px;
+    border-radius: 15px; text-align: center; position: relative;
+}
+
+.food-item img { width: 100%; border-radius: 10px; }
+
+.heart { position: absolute; top: 10px; right: 10px; color: red; cursor: pointer; }
+
+.banner { background: #fff3cd; color: #856404; padding: 15px; margin: 20px; border-radius: 10px; text-align: center; }
