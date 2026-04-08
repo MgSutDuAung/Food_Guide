@@ -1,68 +1,47 @@
-const foodData = {
-    underweight: [
-        { my: "🥚 ကြက်ဥ - ပရိုတင်းဓာတ် ကြွယ်ဝသည်", en: "Eggs - Rich in Protein" },
-        { my: "🥑 ထောပတ်သီး - ကျန်းမာရေးနှင့်ညီညွတ်သော အဆီ", en: "Avocado - Healthy Fats" },
-        { my: "🥜 အခွံမာသီး - အင်အားပြည့်ဝစေသည်", en: "Nuts - Energy Dense" }
-    ],
-    overweight: [
-        { my: "🥦 ဘရိုကိုလီ - အမျှင်ဓာတ် များသည်", en: "Broccoli - High Fiber" },
-        { my: "🍎 ပန်းသီး - ကယ်လိုရီနည်းပြီး ဗိုက်ပြည့်စေသည်", en: "Apple - Low Calorie" },
-        { my: "🐟 ငါး - အဆီနည်းသော ပရိုတင်း", en: "Fish - Lean Protein" }
-    ]
-};
+const allFoods = [
+    // White Meat (အသားဖြူ)
+    { my: "ကြက်သား - ပရိုတင်းဓာတ်", en: "Chicken - Protein" },
+    { my: "ငါး - အဆီနည်း ပရိုတင်း", en: "Fish - Lean Protein" },
+    
+    // Seafood (ပင်လယ်စာ)
+    { my: "ပုစွန် - ကျန်းမာရေးနှင့်ညီညွတ်သော", en: "Shrimp - Healthy Seafood" },
+    { my: "ကဏန်း - အာဟာရပြည့်", en: "Crab - Nutritious" },
+
+    // Red Meat (အသားနီ)
+    { my: "အမဲသား - သံဓာတ်ကြွယ်ဝ", en: "Beef - Iron Rich" },
+    { my: "ဆိတ်သား - အင်အားပြည့်", en: "Mutton - Energy Dense" },
+
+    // Vegetables (ဟင်းသီးဟင်းရွက်)
+    { my: "ဘရိုကိုလီ - အမျှင်ဓာတ်", en: "Broccoli - Fiber Rich" },
+    { my: "ကန်စွန်းရွက် - ဗီတာမင်", en: "Water Spinach - Vitamins" },
+    { my: "ဂေါ်ဖီ - ကျန်းမာရေး", en: "Cabbage - Good for Health" },
+
+    // Fruits (သစ်သီး)
+    { my: "ထောပတ်သီး - ကျန်းမာရေးဆီ", en: "Avocado - Healthy Fats" },
+    { my: "ပန်းသီး - ဗီတာမင်", en: "Apple - Vitamin Source" },
+    { my: "ငှက်ပျောသီး - အင်အား", en: "Banana - Instant Energy" }
+];
 
 let currentLang = 'my';
 
 function changeLang(lang) {
     currentLang = lang;
     document.getElementById('title').innerText = lang === 'my' ? "ကျန်းမာရေးနှင့် အာဟာရ လမ်းညွှန်" : "Health & Food Guide";
-    document.getElementById('bmi-head').innerText = lang === 'my' ? "BMI တွက်ချက်စစ်ဆေးရန်" : "BMI Calculator";
-    document.getElementById('weight').placeholder = lang === 'my' ? "အလေးချိန် (kg)" : "Weight (kg)";
-    document.getElementById('height').placeholder = lang === 'my' ? "အရပ် (cm)" : "Height (cm)";
-    document.getElementById('calc-btn').innerText = lang === 'my' ? "တွက်မည်" : "Calculate";
+    document.getElementById('subtitle').innerText = lang === 'my' ? "သင့်ကျန်းမာရေးအတွက် အကောင်းဆုံး အစားအစာများ" : "Best Foods for Your Health";
+    showAllFoods(); // ဘာသာစကားပြောင်းပြီး ပြန်ပြရန်
 }
 
-function calculateBMI() {
-    const w = document.getElementById('weight').value;
-    const h = document.getElementById('height').value / 100;
-    
-    if (w > 0 && h > 0) {
-        const bmi = (w / (h * h)).toFixed(1);
-        let status = "";
-        let foodType = "";
-
-        if (bmi < 18.5) {
-            status = currentLang === 'my' ? `BMI: ${bmi} (ပိန်နေသည်)` : `BMI: ${bmi} (Underweight)`;
-            foodType = "underweight";
-        } else if (bmi < 25) {
-            status = currentLang === 'my' ? `BMI: ${bmi} (ပုံမှန်)` : `BMI: ${bmi} (Normal Weight)`;
-            foodType = null;
-        } else {
-            status = currentLang === 'my' ? `BMI: ${bmi} (ဝနေသည်)` : `BMI: ${bmi} (Overweight)`;
-            foodType = "overweight";
-        }
-
-        document.getElementById('bmi-result').innerHTML = `<h3>${status}</h3>`;
-        showFood(foodType);
-    }
-}
-
-function showFood(type) {
+function showAllFoods() {
     const list = document.getElementById('food-list');
-    const guideSection = document.getElementById('food-guide');
     list.innerHTML = "";
     
-    if (type) {
-        guideSection.classList.remove('hidden');
-        foodData[type].forEach(item => {
-            const card = document.createElement('div');
-            card.className = "food-card";
-            card.innerText = currentLang === 'my' ? item.my : item.en;
-            list.appendChild(card);
-        });
-    } else {
-        guideSection.classList.add('hidden');
-    }
+    allFoods.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = "food-card";
+        card.style.animationDelay = `${index * 0.1}s`; // Staggered animation effect
+        card.innerText = currentLang === 'my' ? item.my : item.en;
+        list.appendChild(card);
+    });
 }
 
 // Google Login Handler
@@ -83,3 +62,6 @@ function parseJwt(token) {
 function logout() {
     location.reload();
 }
+
+// Website စဖွင့်ဖွင့်ချင်း အစားအသောက်အားလုံးပြရန်
+window.onload = showAllFoods;
