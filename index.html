@@ -5,15 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health & Food Guide</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
     <header>
-        <nav>
+        <div class="lang-nav">
             <button onclick="changeLang('my')">မြန်မာ</button>
             <button onclick="changeLang('en')">English</button>
-        </nav>
+        </div>
         <h1 id="title">ကျန်းမာရေးနှင့် အာဟာရ လမ်းညွှန်</h1>
+        
+        <div id="auth-container">
+            <div id="user-profile" class="hidden">
+                <img id="user-pic" src="" alt="Profile">
+                <span id="user-name"></span>
+                <button onclick="logout()">Logout</button>
+            </div>
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID" 
+                 data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+        </div>
     </header>
 
     <main>
@@ -22,7 +36,7 @@
             <div class="input-group">
                 <input type="number" id="weight" placeholder="အလေးချိန် (kg)">
                 <input type="number" id="height" placeholder="အရပ် (cm)">
-                <button onclick="calculateBMI()">တွက်မည်</button>
+                <button onclick="calculateBMI()" id="calc-btn">တွက်မည်</button>
             </div>
             <div id="bmi-result"></div>
         </section>
