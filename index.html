@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sut-Gyi-Shop | Gaming Store</title>
+    <style>
+        /* တစ်ခါတည်း အလုပ်လုပ်အောင် ဒီမှာ CSS ထည့်ပေးထားပါတယ် */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Pyidaungsu', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            color: #0369a1;
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        header p { color: #0ea5e9; font-weight: bold; margin-bottom: 30px; }
+
+        /* Card Animation */
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid #bae6fd;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            animation: float 4s ease-in-out infinite; /* ပျော့အိအိ လှုပ်နေမည့် animation */
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .card img { width: 80px; height: 80px; margin-bottom: 10px; }
+
+        .card h2 { margin: 10px 0; color: #333; }
+
+        button {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #0284c7; transform: scale(1.1); }
+
+        /* Contact Section */
+        .contact-section {
+            margin-top: 30px;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-btn {
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .telegram { background: #0088cc; }
+        .viber { background: #7360f2; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Sut-Gyi-Shop</h1>
+            <p>Gaming Top-up & Services</p>
+        </header>
+
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/mobile-legends.png" alt="MLBB">
+            <h2>MLBB Diamonds</h2>
+            <p>လျင်မြန်ပြီး စိတ်ချရသော Diamond အားဖြည့်ခြင်း</p>
+            <button>ဝယ်ယူမည်</button>
+        </div>
+
+        <div class="card">
+            <img src="https://img.icons8.com/color/96/pubg.png" alt="PUBG">
+            <h2>PUBG UC</h2>
+            <p>UC ဈေးနှုန်းအသစ်များဖြင့် အားဖြည့်ပါ</p>
+            <button>ဝယ်ယူမည်</button>
+        </div>
+
+        <div class="contact-section">
+            <h3>Contact Us</h3>
+            <div class="social-links">
+                <a href="https://t.me/yourusername" class="social-btn telegram">Telegram</a>
+                <a href="viber://add?number=yournumber" class="social-btn viber">Viber</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
