@@ -1,67 +1,75 @@
-const allFoods = [
-    // White Meat (အသားဖြူ)
-    { my: "ကြက်သား - ပရိုတင်းဓာတ်", en: "Chicken - Protein" },
-    { my: "ငါး - အဆီနည်း ပရိုတင်း", en: "Fish - Lean Protein" },
+// 1. Welcome Screen Timer
+setTimeout(() => {
+    document.getElementById('welcome-screen').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'block';
+}, 9000); // ၃ ဘာသာစကားပြပြီးမှ ပိတ်မည်
+
+// 2. Image Preview Logic
+document.getElementById('fileInput').onchange = function(evt) {
+    const [file] = this.files;
+    if (file) {
+        document.getElementById('preview').src = URL.createObjectURL(file);
+    }
+};
+
+// 3. Myanmar to English Number Converter (For Phone)
+document.getElementById('userPhone').addEventListener('input', function(e) {
+    const myanNums = {'၀':'0','၁':'1','၂':'2','၃':'3','၄':'4','၅':'5','၆':'6','၇':'7','၈':'8','၉':'9'};
+    this.value = this.value.replace(/[၀-၉]/g, s => myanNums[s]);
+});
+
+// 4. Start App Logic
+function startApp() {
+    const name = document.getElementById('userName').value;
+    const phone = document.getElementById('userPhone').value;
     
-    // Seafood (ပင်လယ်စာ)
-    { my: "ပုစွန် - ကျန်းမာရေးနှင့်ညီညွတ်သော", en: "Shrimp - Healthy Seafood" },
-    { my: "ကဏန်း - အာဟာရပြည့်", en: "Crab - Nutritious" },
+    if(!name || !phone) {
+        alert("အချက်အလက်များကို ပြည့်စုံစွာ ဖြည့်ပေးပါဗျာ။");
+        return;
+    }
+    
+    document.getElementById('displayName').innerText = name;
+    document.getElementById('userImg').src = document.getElementById('preview').src;
+    
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+}
 
-    // Red Meat (အသားနီ)
-    { my: "အမဲသား - သံဓာတ်ကြွယ်ဝ", en: "Beef - Iron Rich" },
-    { my: "ဆိတ်သား - အင်အားပြည့်", en: "Mutton - Energy Dense" },
-
-    // Vegetables (ဟင်းသီးဟင်းရွက်)
-    { my: "ဘရိုကိုလီ - အမျှင်ဓာတ်", en: "Broccoli - Fiber Rich" },
-    { my: "ကန်စွန်းရွက် - ဗီတာမင်", en: "Water Spinach - Vitamins" },
-    { my: "ဂေါ်ဖီ - ကျန်းမာရေး", en: "Cabbage - Good for Health" },
-
-    // Fruits (သစ်သီး)
-    { my: "ထောပတ်သီး - ကျန်းမာရေးဆီ", en: "Avocado - Healthy Fats" },
-    { my: "ပန်းသီး - ဗီတာမင်", en: "Apple - Vitamin Source" },
-    { my: "ငှက်ပျောသီး - အင်အား", en: "Banana - Instant Energy" }
-];
-
-let currentLang = 'my';
+// 5. Multi-language Switching
+const translations = {
+    mm: {
+        banner: "ဟင်းသီးဟင်းရွက်များကို သန့်ရှင်းသော Supermarket များတွင် ဝယ်ယူရန် အကြံပြုပါသည်။",
+        search: "ရှာဖွေရန်...",
+        foodT: "နိုင်ငံစုံ အစားအစာများ",
+        drinkT: "သောက်စရာနှင့် ၂၄ နာရီဆိုင်များ"
+    },
+    en: {
+        banner: "We recommend buying vegetables at clean Supermarkets.",
+        search: "Search for food...",
+        foodT: "International Foods",
+        drinkT: "Drinks & 24hr Stores"
+    },
+    cn: {
+        banner: "我们建议在干净的超市购买蔬菜。",
+        search: "搜索美食...",
+        foodT: "国际美食",
+        drinkT: "饮料和 24 小时营业商店"
+    }
+};
 
 function changeLang(lang) {
-    currentLang = lang;
-    document.getElementById('title').innerText = lang === 'my' ? "ကျန်းမာရေးနှင့် အာဟာရ လမ်းညွှန်" : "Health & Food Guide";
-    document.getElementById('subtitle').innerText = lang === 'my' ? "သင့်ကျန်းမာရေးအတွက် အကောင်းဆုံး အစားအစာများ" : "Best Foods for Your Health";
-    showAllFoods(); // ဘာသာစကားပြောင်းပြီး ပြန်ပြရန်
+    document.getElementById('veggie-banner').innerText = translations[lang].banner;
+    document.getElementById('search').placeholder = translations[lang].search;
+    document.getElementById('food-t').innerText = translations[lang].foodT;
+    document.getElementById('drink-t').innerText = translations[lang].drinkT;
 }
 
-function showAllFoods() {
-    const list = document.getElementById('food-list');
-    list.innerHTML = "";
-    
-    allFoods.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.className = "food-card";
-        card.style.animationDelay = `${index * 0.1}s`; // Staggered animation effect
-        card.innerText = currentLang === 'my' ? item.my : item.en;
-        list.appendChild(card);
-    });
+// 6. Action Functions
+function showDetail(name, phone, maps) {
+    alert(`ဆိုင်နာမည်: ${name}\nဖုန်း: ${phone}\nတည်နေရာ: ${maps}`);
 }
 
-// Google Login Handler
-function handleCredentialResponse(response) {
-    const responsePayload = parseJwt(response.credential);
-    document.getElementById('auth-container').classList.add('hidden');
-    document.getElementById('user-profile').classList.remove('hidden');
-    document.getElementById('user-name').innerText = responsePayload.name;
-    document.getElementById('user-pic').src = responsePayload.picture;
+function scrollToSection(id) {
+    const element = document.getElementById(id + '-section');
+    element.scrollIntoView({ behavior: 'smooth' });
 }
-
-function parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    return JSON.parse(window.atob(base64));
-}
-
-function logout() {
-    location.reload();
-}
-
-// Website စဖွင့်ဖွင့်ချင်း အစားအသောက်အားလုံးပြရန်
-window.onload = showAllFoods;
