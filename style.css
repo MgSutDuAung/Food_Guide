@@ -1,105 +1,84 @@
-/* Background & Global Styles */
+/* Website တစ်ခုလုံးရဲ့ ပုံစံ */
 body {
-    margin: 0;
-    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
+    background-color: #f0fdf4; /* အစိမ်းနုရောင် (ကျန်းမာရေးနှင့်ညီညွတ်သော look) */
+    color: #166534;
+    margin: 0;
+    padding: 20px;
+    transition: all 0.5s ease;
 }
 
-.container {
-    max-width: 900px;
-    width: 95%;
+header {
     text-align: center;
+    padding: 20px;
+    animation: fadeInDown 1s ease; /* အပေါ်ကနေ ဆင်းလာတဲ့ animation */
 }
 
-header h1 {
-    color: #0369a1;
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    text-transform: uppercase;
-}
-
-/* Shop Grid Layout */
-.shop-grid {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 40px;
-}
-
-/* Card Style & Floating Animation */
-.card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 2px solid #bae6fd;
+/* BMI Card ဒီဇိုင်း */
+.bmi-section {
+    background: white;
+    padding: 25px;
     border-radius: 20px;
-    padding: 30px;
-    width: 280px;
-    position: relative;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    
-    /* အမြဲလှုပ်နေစေမယ့် Floating Animation */
-    animation: float 4s ease-in-out infinite;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    transform: scale(0.9);
+    animation: popIn 0.8s forwards; /* ကြွတက်လာတဲ့ animation */
 }
 
-.card:hover {
-    transform: scale(1.08) rotate(2deg); /* Mouse တင်ရင် ပိုလှုပ်သွားမယ် */
+input {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #bbf7d0;
+    border-radius: 10px;
+    outline: none;
 }
 
-/* Floating Animation Keyframes */
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-}
-
-/* Gaming Hero Background Effects (Optional) */
-.mlbb-card::before {
-    content: 'MLBB';
-    position: absolute;
-    top: 10px; right: 10px;
-    font-weight: bold; color: rgba(0, 0, 0, 0.05);
-}
-
-/* Social Buttons */
-.contact-section { margin-top: 50px; }
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.social-btn {
-    text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 50px;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.telegram { background-color: #0088cc; }
-.viber { background-color: #7360f2; }
-
-.social-btn:hover {
-    opacity: 0.8;
-    transform: translateY(-3px);
-}
-
-/* Button Styling */
 button {
-    background: #0ea5e9;
+    background-color: #22c55e;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
+    transition: transform 0.2s, background 0.3s;
 }
+
+/* ခလုတ်ကို နှိပ်လိုက်ရင် တုံ့ပြန်ပုံ */
+button:active {
+    transform: scale(0.95);
+}
+
+button:hover {
+    background-color: #16a34a;
+    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
+}
+
+/* အစားအသောက် Card လေးများ */
+.food-card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.food-card:hover {
+    transform: translateY(-10px); /* Mouse တင်ရင် အပေါ်ကြွတက်မယ့် animation */
+}
+
+/* Animation သတ်မှတ်ချက်များ */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    to { transform: scale(1); }
+}
+
+.hidden { display: none; }
