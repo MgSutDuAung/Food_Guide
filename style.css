@@ -1,113 +1,156 @@
 :root {
-    --primary-blue: #004aad;
-    --accent-blue: #00d4ff;
-    --glass: rgba(255, 255, 255, 0.15);
+    --primary: #004aad;
+    --accent: #00d4ff;
+    --bg: #f5f7fa;
+    --white: #ffffff;
+    --text: #333333;
 }
 
 body {
     margin: 0;
-    background-color: var(--primary-blue);
-    color: white;
-    font-family: sans-serif;
+    font-family: 'Pyidaungsu', 'Segoe UI', Tahoma, sans-serif;
+    background-color: var(--primary);
 }
 
-/* Welcome Animations */
-#welcome-screen {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--primary-blue);
+/* Login */
+#login-screen {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    min-height: 100vh;
 }
 
-.fade-in-type {
-    opacity: 0;
-    font-size: 1.5rem;
-    margin: 10px;
-    border-right: 2px solid white;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-}
-
-#w-mm { animation: fadeIn 1s forwards, typing 2s steps(20) 1s forwards; }
-#w-en { animation: fadeIn 1s 3s forwards, typing 2s steps(20) 4s forwards; }
-#w-cn { animation: fadeIn 1s 6s forwards, typing 2s steps(20) 7s forwards; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-
-/* Profile Card */
-.glass-card {
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+.login-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
     padding: 30px;
     border-radius: 25px;
-    width: 320px;
-    margin: 50px auto;
     text-align: center;
+    width: 320px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
 }
 
-.profile-frame {
-    width: 110px; height: 110px;
+.profile-upload {
+    width: 100px;
+    height: 100px;
+    background: white;
     border-radius: 50%;
-    margin: 0 auto 15px;
-    padding: 5px;
-    border: 2px solid var(--accent-blue);
-    box-shadow: 0 0 15px var(--accent-blue);
+    margin: 0 auto 20px;
+    border: 3px solid var(--accent);
+    overflow: hidden;
+    cursor: pointer;
 }
 
-.profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.profile-upload img { width: 100%; height: 100%; object-fit: cover; }
 
 input {
-    width: 90%; padding: 12px; margin: 10px 0;
-    border-radius: 10px; border: none; outline: none;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 12px;
+    border: none;
+    box-sizing: border-box;
 }
 
 .enter-btn {
-    background: var(--accent-blue);
-    color: white; font-weight: bold;
-    width: 95%; padding: 12px; border: none; border-radius: 10px; cursor: pointer;
+    width: 100%;
+    padding: 14px;
+    background: var(--accent);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-/* Main Layout */
-.sticky-header {
-    position: sticky; top: 0;
-    background: var(--primary-blue);
-    padding: 15px; border-bottom: 1px solid var(--glass);
+/* Main App */
+#main-app { display: none; background: var(--bg); min-height: 100vh; color: var(--text); }
+
+header {
+    background: var(--primary);
+    padding: 20px;
+    color: white;
+    position: sticky;
+    top: 0;
     z-index: 1000;
 }
 
-.header-top { display: flex; justify-content: space-between; align-items: center; }
+.header-ui { display: flex; justify-content: space-between; align-items: center; }
+.user-meta { display: flex; align-items: center; gap: 10px; }
+.user-meta img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); }
 
-.nav-profile-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent-blue); }
-
-.search-bar { width: 95%; margin-top: 15px; border-radius: 20px; }
-
-.category-nav { display: flex; overflow-x: auto; gap: 10px; margin-top: 10px; }
-
-.category-nav button {
-    background: white; color: black; border: none;
-    padding: 8px 18px; border-radius: 20px; white-space: nowrap;
+.lang-selector button {
+    background: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-/* Food Grid */
+.lang-selector button.active-lang { background: white; color: var(--primary); }
+
+.search-box-container { margin-top: 15px; }
+#searchBar { width: 100%; padding: 12px; border-radius: 25px; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+.category-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding: 15px;
+    background: white;
+    scrollbar-width: none;
+}
+
+.cat-btn {
+    background: #f0f0f0;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.cat-btn.active { background: var(--primary); color: white; }
+
+.info-banner {
+    background: #fff3cd;
+    color: #856404;
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
 .food-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 15px; padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 15px;
 }
 
-.food-item {
-    background: white; color: black; padding: 10px;
-    border-radius: 15px; text-align: center; position: relative;
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-.food-item img { width: 100%; border-radius: 10px; }
+.card img { width: 100%; height: 110px; border-radius: 12px; object-fit: cover; }
+.card h4 { margin: 10px 0 5px; font-size: 15px; }
+.price-tag { color: var(--primary); font-weight: bold; display: block; margin-bottom: 10px; }
 
-.heart { position: absolute; top: 10px; right: 10px; color: red; cursor: pointer; }
-
-.banner { background: #fff3cd; color: #856404; padding: 15px; margin: 20px; border-radius: 10px; text-align: center; }
+.view-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
