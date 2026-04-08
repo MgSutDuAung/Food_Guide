@@ -10,40 +10,34 @@
 <body>
 
     <header>
-        <div class="lang-nav">
-            <button onclick="changeLang('my')">မြန်မာ</button>
-            <button onclick="changeLang('en')">English</button>
+        <div class="top-bar">
+            <div class="lang-nav">
+                <button onclick="changeLang('my')">မြန်မာ</button>
+                <button onclick="changeLang('en')">English</button>
+            </div>
+            
+            <div id="auth-container">
+                <div id="user-profile" class="hidden">
+                    <img id="user-pic" src="" alt="Profile">
+                    <span id="user-name"></span>
+                    <button onclick="logout()">Logout</button>
+                </div>
+                <div id="g_id_onload"
+                     data-client_id="YOUR_GOOGLE_CLIENT_ID" 
+                     data-callback="handleCredentialResponse">
+                </div>
+                <div class="g_id_signin" data-type="standard"></div>
+            </div>
         </div>
-        <h1 id="title">ကျန်းမာရေးနှင့် အာဟာရ လမ်းညွှန်</h1>
         
-        <div id="auth-container">
-            <div id="user-profile" class="hidden">
-                <img id="user-pic" src="" alt="Profile">
-                <span id="user-name"></span>
-                <button onclick="logout()">Logout</button>
-            </div>
-            <div id="g_id_onload"
-                 data-client_id="YOUR_GOOGLE_CLIENT_ID" 
-                 data-callback="handleCredentialResponse">
-            </div>
-            <div class="g_id_signin" data-type="standard"></div>
-        </div>
+        <h1 id="title">ကျန်းမာရေးနှင့် အာဟာရ လမ်းညွှန်</h1>
+        <p id="subtitle">သင့်ကျန်းမာရေးအတွက် အကောင်းဆုံး အစားအစာများ</p>
     </header>
 
     <main>
-        <section class="bmi-section">
-            <h2 id="bmi-head">BMI တွက်ချက်စစ်ဆေးရန်</h2>
-            <div class="input-group">
-                <input type="number" id="weight" placeholder="အလေးချိန် (kg)">
-                <input type="number" id="height" placeholder="အရပ် (cm)">
-                <button onclick="calculateBMI()" id="calc-btn">တွက်မည်</button>
-            </div>
-            <div id="bmi-result"></div>
-        </section>
-
-        <section id="food-guide" class="hidden">
-            <h2 id="guide-head">သင့်အတွက် အကြံပြုထားသော အစားအစာများ</h2>
-            <div id="food-list" class="food-grid"></div>
+        <section id="food-guide">
+            <div id="food-list" class="food-grid">
+                </div>
         </section>
     </main>
 
