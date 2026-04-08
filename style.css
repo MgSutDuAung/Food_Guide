@@ -1,84 +1,70 @@
-/* Website တစ်ခုလုံးရဲ့ ပုံစံ */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0fdf4; /* အစိမ်းနုရောင် (ကျန်းမာရေးနှင့်ညီညွတ်သော look) */
+    font-family: 'Pyidaungsu', sans-serif;
+    background-color: #f0fdf4;
     color: #166534;
     margin: 0;
-    padding: 20px;
-    transition: all 0.5s ease;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
+    width: 100%;
+    max-width: 600px;
     text-align: center;
-    padding: 20px;
-    animation: fadeInDown 1s ease; /* အပေါ်ကနေ ဆင်းလာတဲ့ animation */
+    padding: 20px 0;
+    animation: fadeInDown 1s ease;
 }
 
-/* BMI Card ဒီဇိုင်း */
+.lang-nav { margin-bottom: 15px; }
+
 .bmi-section {
     background: white;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 90%;
     max-width: 400px;
-    margin: 20px auto;
     text-align: center;
-    transform: scale(0.9);
-    animation: popIn 0.8s forwards; /* ကြွတက်လာတဲ့ animation */
+    animation: popIn 0.6s ease-out;
 }
 
 input {
-    width: 80%;
-    padding: 12px;
+    width: 85%;
+    padding: 15px;
     margin: 10px 0;
     border: 2px solid #bbf7d0;
-    border-radius: 10px;
-    outline: none;
+    border-radius: 12px;
+    font-size: 16px;
 }
 
 button {
-    background-color: #22c55e;
+    background: #22c55e;
     color: white;
     border: none;
     padding: 12px 25px;
-    border-radius: 10px;
-    cursor: pointer;
+    border-radius: 12px;
     font-weight: bold;
-    transition: transform 0.2s, background 0.3s;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* ခလုတ်ကို နှိပ်လိုက်ရင် တုံ့ပြန်ပုံ */
-button:active {
-    transform: scale(0.95);
-}
+button:hover { transform: scale(1.05); background: #16a34a; }
 
-button:hover {
-    background-color: #16a34a;
-    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.4);
-}
-
-/* အစားအသောက် Card လေးများ */
 .food-card {
     background: white;
-    border-radius: 15px;
     padding: 15px;
-    margin: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+    margin: 10px 0;
+    border-radius: 15px;
+    border-left: 5px solid #22c55e;
+    animation: slideRight 0.5s ease forwards;
 }
 
-.food-card:hover {
-    transform: translateY(-10px); /* Mouse တင်ရင် အပေါ်ကြွတက်မယ့် animation */
-}
+#user-pic { width: 40px; border-radius: 50%; vertical-align: middle; }
 
-/* Animation သတ်မှတ်ချက်များ */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes popIn {
-    to { transform: scale(1); }
-}
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes slideRight { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
 
 .hidden { display: none; }
